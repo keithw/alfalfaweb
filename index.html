@@ -2,10 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Mosh: the mobile shell</title>
+    <title>Alfalfa: A Videoconferencing Protocol for Cellular Wireless Networks
+</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mobile shell that supports roaming and intelligent local echo. Like SSH secure shell, but allows mobility and more responsive and robust.">
-    <meta name="author" content="Keith Winstein <mosh-devel@mit.edu>">
+    <meta name="description" content=Alfalfa is an Internet
+videoconferencing protocol that works well over cellular wireless
+networks, where link speeds change dramatically with time, and current
+transport protocols build up lengthy in-network queues.">
+    <meta name="author" content="Keith Winstein <keithw@mit.edu>">
 
     <!-- Le styles -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -86,12 +90,13 @@
           <div class="nav-collapse">
             <ul class="nav">
               <li><a href="#about">About</a></li>
-              <li><a href="#getting">Getting Mosh</a></li>
-              <li><a href="#usage">Usage</a></li>
-              <li><a href="#techinfo">Technical Info</a></li>
+              <li><a href="#sprout">Sprout</a></li>
+              <li><a href="#results">Results</a></li>
+              <li><a href="#methods">Methods</a></li>
+              <li><a href="#video">State-sync video</a></li>
+              <li><a href="#code">Code</a></li>
               <li><a href="#faq">FAQ</a></li>
               <li><a href="#contact">Contact</a></li>
-              <li><a href="https://github.com/keithw/mosh">Mosh on GitHub</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -105,16 +110,23 @@
 	<p>
 	<div class="row">
 	<div class="span5">
-        <p><h1>Mosh</h1>
-	<h2>(mobile shell)</h2></p>
-          <p>Remote terminal application that
-        allows <strong class="callout">roaming</strong>, supports <strong class="callout">intermittent
-        connectivity</strong>, and provides intelligent
-	<strong class="callout">local echo</strong> and line editing of user keystrokes.</p>
-	  <p>Mosh is a replacement for SSH. It's more robust and
-	    responsive, especially over Wi-Fi, cellular, and
-	    long-distance links.</p>
-	  <p>Mosh is free software, available for GNU/Linux, FreeBSD, Solaris, Mac OS X, and Android.</p>
+        <p><h1>Alfalfa</h1>
+
+	<p>Alfalfa is an Internet videoconferencing protocol that
+works well over cellular wireless networks, where link speeds change
+dramatically with time, and current applications build up
+lengthy in-network queues.</p>
+
+	<p>In evaluations on traces from commercial LTE and 3G
+	  networks, Alfalfa's rate control scheme achieved 2&ndash;4
+	  times the throughput of Skype, Apple Facetime, and Google
+	  Hangout, while reducing self-inflicted delay by 7&ndash;9
+	  times.</p>
+
+	<p>Our draft research paper (under submission), the C++ implementation,
+	  and supplementary information are available here. We welcome
+	  contributions to the code and your feedback!</p>
+
 	</div><div class="span5"><img src="mosh.png" style="max-width:120%;"></div>
 	</div>
 	</p>
