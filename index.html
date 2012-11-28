@@ -90,10 +90,7 @@ transport protocols build up lengthy in-network queues.">
           <div class="nav-collapse">
             <ul class="nav">
               <li><a href="#about">About</a></li>
-              <li><a href="#sprout">Sprout</a></li>
-              <li><a href="#results">Results</a></li>
-              <li><a href="#methods">Methods</a></li>
-              <li><a href="#video">State-sync video</a></li>
+              <li><a href="#paper">Paper</a></li>
               <li><a href="#code">Code</a></li>
               <li><a href="#faq">FAQ</a></li>
               <li><a href="#contact">Contact</a></li>
@@ -128,9 +125,10 @@ transport protocols build up lengthy in-network queues.">
 		  times.</p>
 		
 		<p>Alfalfa's draft research paper (under submission),
-		  C++ implementation, and supplementary
-		  information are available here. We welcome
-		  contributions to the code and your feedback.</p>
+		  C++ implementation, and supplementary information
+		  are available here. This is a draft Web site and we
+		  are working to improve it. We welcome contributions
+		  to the code and your feedback.</p>
 		
 		<p><small>&mdash; Keith Winstein, Anirudh Sivaraman,
 		    and Hari Balakrishnan</small></p>
@@ -145,11 +143,33 @@ transport protocols build up lengthy in-network queues.">
           <p><a class="btn btn-primary btn-large" href="#results">Get the research paper &raquo;</a>
           <a class="btn btn-primary btn-large" href="#results">Get the code &raquo;</a></p>
 	</div>
+      </section>
       
-      <section id="getting">
+      <section id="paper">
 	<div class="page-header">
-	  <h1>Getting Mosh</h1>
+	  <h1>Research paper</h1>
 	</div>
+
+	  <p><a href="alfalfa-paper-draft.pdf"><img src="pdf.png"> Alfalfa: A Videoconferencing Protocol for Cellular Wireless Networks</a> (in submission)</p>
+
+	  <p>Supplementary material, including the raw traces of mobile cellular
+network paths and more information about the methods, will be posted soon.</p>
+
+      </section>
+
+      <section id="code">
+	<div class="page-header">
+	  <h1>Code</h1>
+	</div>
+
+	  <p>The source code to Alfalfa/Sprout (evaluated in the research paper) is <a href="https://github.com/keithw/alfalfa">available on GitHub.</a></p>
+
+	  <p>Our "explicit-state" MPEG-2 implementation includes an <a href="https://github.com/keithw/mympeg2enc">encoder API (based on mpeg2enc)</a> and a <a href="https://github.com/keithw/ahab">decoder API (built around libmpeg2)</a>.</p>
+
+	  <p>Our code for saturating wireless networks and then replaying those traces on a hardware gateway is also <a href="https://github.com/keithw/multisend/tree/master/sender">available on GitHub.</a></p>
+
+	  <p>Our implementation of the "CoDel" AQM algorithm <a href="https://github.com/anirudhSK/cell-codel/blob/master/codel-for-cellsim/delay-queue.cc">is available in a different repository.</a></p>
+
       </section>
 
       <section id="faq">
@@ -157,21 +177,32 @@ transport protocols build up lengthy in-network queues.">
 	  <h1>Frequently Asked Questions</h1>
 	</div>
 
-	<h4 class="callout">Q: Who wrote Mosh?</h4>
+	<h4 class="callout">Q: Who wrote Alfalfa?</h4>
 
-	<p>Mosh was written by Keith Winstein, along with Anders Kaseorg, Quentin Smith, Richard Tibbetts and Keegan McAllister.</p>
-	<h4 class="callout">Q: Who helped with mosh?</h4>
+	<p>Alfalfa was written by Keith Winstein, Anirudh Sivaraman, and Hari Balakrishnan.</p>
 
-	<p>We're very grateful for assistance and support from:
+	<h4 class="callout">Q: Can I use this for a real video conference?</h4>
 
-	  <ul>
+	<p>Unfortunately, not yet. We have an implementation of
+	"explicit-state" MPEG-2 video, as discussed in the research
+	paper, but we don't have audio and we haven't evaluated the
+	system end-to-end. Our evaluation focuses on the rate control
+	algorithm (Sprout), which achieves the maximum throughput
+	possible while bounding the probability of building up a
+	length in-network queue.</p>
 
-<li>Hari Balakrishnan, who advised this work and came up with the name.
+	<h4 class="callout">Q: Who helped with Alfalfa?</h4>
+
+	<p>We're grateful for assistance and help discussions with Andrew McGregor, Tim Shepard, Dave Täht, and Shuo Deng.</p>
+
+      </section>
 
       <section id="contact">
 	<div class="page-header">
 	  <h1>Contact</h1>
 	</div>
+
+	Please e-mail alfalfa at mit dot edu with any questions.
 
       </section>
 
