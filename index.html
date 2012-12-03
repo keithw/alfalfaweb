@@ -92,6 +92,8 @@ transport protocols build up lengthy in-network queues.">
               <li><a href="#about">About</a></li>
               <li><a href="#paper">Paper</a></li>
               <li><a href="#code">Code</a></li>
+              <li><a href="#methods">Methods</a></li>
+              <li><a href="#results">Results</a></li>
               <li><a href="#faq">FAQ</a></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
@@ -153,7 +155,7 @@ transport protocols build up lengthy in-network queues.">
 	  <p><a href="alfalfa-paper-draft.pdf"><img src="pdf.png"> Alfalfa: A Videoconferencing Protocol for Cellular Wireless Networks</a> (in submission)</p>
 
 	  <p>Supplementary material, including the raw traces of mobile cellular
-network paths and more information about the methods, will be posted soon.</p>
+network paths, will be posted soon.</p>
 
       </section>
 
@@ -169,6 +171,59 @@ network paths and more information about the methods, will be posted soon.</p>
 	  <p>Our code for saturating wireless networks and then replaying those traces on a hardware gateway is also <a href="https://github.com/keithw/multisend/tree/master/sender">available on GitHub.</a></p>
 
 	  <p>Our implementation of the "CoDel" AQM algorithm <a href="https://github.com/anirudhSK/cell-codel/blob/master/codel-for-cellsim/delay-queue.cc">is available in a different repository.</a></p>
+      </section>
+
+      <section id="methods">
+	<div class="page-header">
+	  <h1>Methods</h1>
+	</div>
+
+	<h2>Data Collection</h2>
+
+	<p>Cellular network traces were collected while driving in
+Boston, Mass., and surrounding municipalities. We simultaneously
+saturated the uplink and downlink of an Android smartphone tethered to
+a Linux laptop and measured the times when packets arrived across each
+link. Uplink datagrams were sent to a server at MIT, generally less
+than 50 ms RTT from the carrier's first/last hop.</p>
+
+	<p>The code for the <a href="https://github.com/keithw/multisend/blob/master/sender/saturatr.cc">saturatr</a> can be found on GitHub.</p>
+
+	<p>The Verizon LTE and 1xEV-DO (3G) traces used a Samsung
+	Galaxy Nexus smartphone. The AT&T trace used a Samsung Galaxy
+	S3 smartphone. The T-Mobile trace used an HTC smartphone.</p>
+
+	<h2>Evaluation of Systems</h2>
+
+	<p>We used a physical gateway computer, with two Ethernet interfaces,
+	  to replay the recordings from cellular networks. The gateway
+	  queued incoming packets indefinitely, and released them to
+	  the other interface according to the schedule previously recorded
+	  in the trace.</p>
+
+	<p>The code for
+	the <a href="https://github.com/keithw/multisend/blob/master/sender/cellsim.cc">cellsim</a>
+	tool (used to replay traces from the saturatr) can be found on
+	GitHub.</p>
+
+	<p>We evaluated videoconferencing systems and TCP variants with one
+	  computer connected directly to a gigabit switch and to the Internet.
+	  The other computer was connected to the cellsim, whose other Ethernet
+	  interface was connected to the same gigabit switch.</p>
+
+	<p>We tested the following configurations:
+
+	<table>
+	  <tr><th>Program</th><th>Version</th><th>OS</th><th>Endpoints</th></tr>
+	  <tr><td>Alfalfa/Sprout</td><td>"evaluated" and "ewma-evaluated" tags</td><td>Linux 3.2.0-29-generic (Ubuntu 12.04 LTS)</td><td>Intel Core i7 PC</td></tr>
+	  <tr><td>Skype</td><td>5.10.0.116</td><td>Windows 7</td><td>Intel Core i7 PC</td></tr>
+	  <tr><td>Google Hangout</td><td>in Chrome 21.0.1180.89</td><td>Windows 7</td><td>Intel Core i7 PC</td></tr>
+	  <tr><td>Apple Facetime</td><td>2.0 (1070)</td><td>OS X 10.8.1</td><td>MacBook Pro (2.3 GHz i7), MacBook Air (1.8 GHz i5)</td></tr>
+	  <tr><td>TCP CUBIC</td><td>in Linux 3.2.0</td><td></td><td>Intel Core i7 PC</td></tr>
+	  <tr><td>TCP Vegas</td><td>in Linux 3.2.0</td><td></td><td>Intel Core i7 PC</td></tr>
+	  <tr><td>LEDBAT</td><td>in uTP</td><td>Linux 3.2.0</td><td>Intel Core i7 PC</td></tr>
+	  <tr><td>COMPOUND TCP</td><td>in Windows 7</td><td></td><td>Intel Core i7 PC</td></tr>
+	</table>
 
       </section>
 
@@ -193,8 +248,48 @@ network paths and more information about the methods, will be posted soon.</p>
 
 	<h4 class="callout">Q: Who helped with Alfalfa?</h4>
 
-	<p>We're grateful for assistance and help discussions with Andrew McGregor, Tim Shepard, Dave Täht, and Shuo Deng.</p>
+	<p>We're grateful for assistance and helpful discussions with Andrew McGregor, Tim Shepard, Dave Täht, and Shuo Deng.</p>
 
+	<h4 class="callout">Q: What are the major limitations of these
+	measurements and this work?</h4>
+
+	<ul>
+
+	<li>We have only tested configurations where the flow (be it
+	Alfalfa, Skype, TCP, etc.) is the only flow on the bottleneck
+	link. This may be realistic for a cellular link with per-user
+	  queueing, but a home Internet link with many users sharing
+	  a cable modem may behave differently.</li>
+
+	<li>Our measurements covered a bidirectional video conference
+	  that transited one cellular link in each direction
+	  simultaneously. We haven't tested mobile-to-mobile links
+	  where each direction would transit two cellular links,
+	  or more complicated topologies.</li>
+
+	<li>We have only quantitatively evaluated
+	  the <strong>networking</strong> performance of Alfalfa,
+	  compared with the comparable algorithms in videoconferencing
+	  programs and various flavors of TCP. Although we think that
+	  the Alfalfa "explicit-state" video API is a good idea, we
+	  have only implemented it for MPEG-2, it is not competitive
+	  with more recent video coding techniques, and we have not
+	  tested an end-to-end video conferencing application.</li>
+
+	<li>Alfalfa's nature as an <strong>end-to-end</strong>
+	  application means that it cannot do things that modifying
+	  routers (e.g. by adding AQM) might achieve. For example, if
+	  a competing TCP flow has created a standing queue before our
+	  bottleneck link, it is probably impossible for any protocol
+	  to achieve low delay over that link. Changing the router to
+	  include per-flow queueing or AQM might be able to fix the
+	  problem in a way an end-to-end protocol can't.</li>
+
+	<li>Sprout's predictive model of link dynamics hasn't been
+	  tuned in response to much real-world dat &mdash; it was
+	  "frozen" before we collected our traces and we have not
+	  tried to improve its predictive power on real varying links
+	  yet.</li>
       </section>
 
       <section id="contact">
