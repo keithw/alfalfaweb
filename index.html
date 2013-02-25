@@ -199,10 +199,82 @@ than 50 ms RTT from the carrier's first/last hop.</p>
 	<p> For each network, raw traces for both the uplink and the downlink
 	are available <a href="data/cleaned_traces.zip" >here</a> </p>
 
-        <h2> Reproducing Results</h2>
+        <h2> Raw data used to generate the plots </h2>
 
-        <p> Instructions to reproduce all of our results( Figures 7,8 and 9 and the tables in Section 5.6 and 5.7 ) are available <a href="data/ReproducingResults.zip">here</a>. Please contact us at alfalfa at mit dot edu in case you have any questions/comments.
+        <p> The raw data along with instructions to reproduce all of our results( Figures 7,8 and 9 and the tables in Section 5.6 and 5.7 ) from the raw data are available <a href="data/ReproducingResults.zip">here</a>. Please contact us at alfalfa at mit dot edu in case you have any questions/comments.
         </p>
+
+        <h2> Reproducing our results </h2>
+
+        <p> You will need 3 separate physical machines to reproduce our results:
+            <ol>
+            <li>The first should have a direct connection to the Internet (henceforth to be referred to as the server).
+            <li>The second one (to be referred to as cellsim_machine) should have 2 ethernet cards, one of which is directly connected to the Internet (eth0)
+            <li>The third one (to be referred to as the client) should have one Ethernet card and its ethernet cable should be connected into the second ethernet card (eth1) of cellsim_machine. As described in the paper, cellsim_machine routes traffic from the client to the Internet and back.
+            </ol>
+        </p>
+
+        <h3> Cellsim machine instructions </h3>
+
+            Once, the hardware setup is done, do the following on cellsim_machine:
+            <ol>
+            <li> Download the source for cellsim, our trace driven emulator from here : <a href="https://github.com/keithw/multisend/archive/evaluated.zip">here</a>
+            <li> cd into the sender directory and run make cellsim ( You 'll need C++11 support ). This will create the cellsim executable.
+            <li> Ensure both ethernet interfaces on cellsim_machine are UP and set to promiscous mode. To do this, run : <pre> sudo ifconfig ethX up promisc </pre>
+            <li> Turn off all segmentation offloads on both interfaces using : <pre> sudo ethtool --offload ethX gso off  tso off gro off </pre>
+            <li> Run : sudo ./cellsim uplink_trace downlink_trace client_mac loss_rate, where :
+                <ol>
+                <li> uplink_trace is a cellular network trace for the uplink.
+                <li> downlink_trace is a cellular network trace for the downlink.
+                <li> client_mac is the MAC address of the client machine (ie the third machine in the description above).
+                <li> loss_rate simulates probabilistic head drop and is a fraction between 0 and 1.
+                <li> NOTE: Both uplink_trace and downlink_trace need timestamps in milliseconds that start from zero for cellsim to function properly. The traces <a href="data/cleaned_traces.zip" >here</a>
+                have absolute UNIX timestamps in nanoseconds which need to be converted to relative timestamps before feeding them to cellsim.
+                <li> NOTE2: The interface connected to the Internet is hard coded as eth0 and the interface connected to the client is hardcoded as eth1. If you have different names on your machine,
+                you will need to change both in cellsim.cc.
+                </ol>
+            <li> Once cellsim is running, it produces a sequence of packet deliveries in both the uplink and the downlink direction. These can be analysed using the scorer and quantiles scripts
+            as described <a href="data/ReproducingResults.zip" >here</a> 
+            </ol>
+
+        <h3> Client/Server machine instructions </h3>
+            <p>
+            Cellsim is designed to operate transparently. So, you should be able to run pretty much anything on the client so long as the client has a public IP. In particular, you can setup TCP connections using            different congestion control algorithms on Windows and Linux. To set the congestion control algorithm in Linux on either the client or the server, run(as root). (Replace vegas with cubic for TCP 
+            cubic.)
+            <pre> 
+             modprobe tcp_vegas
+             echo "vegas" > /proc/sys/net/ipv4/tcp_congestion_control
+             </pre>
+             </p>
+
+             <p>
+            To enable, Compound TCP on Windows 7, run the following on an elevated command prompt :
+             <pre>netsh int tcp set global congestionprovider=ctcp</pre>
+             </p>
+
+            <p>
+            Our version of LEDBAT is taken from the libutp implementation, available <a href="https://github.com/bittorrent/libutp" > here </a>
+            </p>
+
+        <h3> Running CoDel </h3>
+            <p>
+            Our version of cellsim, with CoDel integrated into it is available <a href="https://github.com/anirudhSK/cell-codel/archive/evaluated.zip" > here </a>. cd into codel-for-cellsim and run 
+            make cell-codel-sim ( you ll need C++11 support). Run : sudo ./cell-codel-sim uplink_trace downlink_trace client_mac codel_enable. Set codel_enable to 1 or 0 depending on whether you want it enabled.             Running it with 0 is equivalent to running the original cellsim. uplink_trace, downlink_trace and client_mac have the same interpretations as for cellsim.
+            </p>
+
+        <h3> Running Sprout </h3>
+             The version of Sprout that was evaluated in the paper is available : <a href="https://github.com/keithw/alfalfa/archive/master.zip"> here </a>. 
+             You will need to install the following libraries to build Sprout: 
+             <pre>
+             sudo apt-get install libboost-math1.50-dev libboost-math1.50.0 libprotobuf7 libprotobuf-dev
+             </pre>
+             Next, cd into alfalfa, and run:
+            <pre>
+            ./autogen.sh 
+            ./configure --enable-examples
+            make
+            </pre>
+            The Sprout executable should now available at src/examples/sproutbt2. To run the Sprout server, type : ./sproutbt2 (without arguments). To run the Sprout client, type : ./sproutbt2 server_address 60001. Sprout might need between 20 and 40 seconds to start up (to precompute Gaussian Distributions required for inference).
 
 	<h2>Evaluation of Systems</h2>
 
