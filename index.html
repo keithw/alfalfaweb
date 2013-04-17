@@ -2,13 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Alfalfa: A Videoconferencing Protocol for Cellular Wireless Networks
+    <title>Sprout: Stochastic Forecasts Achieve High Throughput and Low Delay over Cellular Networks</title>
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content=Alfalfa is an Internet
-videoconferencing protocol that works well over cellular wireless
-networks, where link speeds change dramatically with time, and current
-transport protocols build up lengthy in-network queues.">
+    <meta name="description" content="Sprout is an end-to-end transport protocol for interactive applications that desire high throughput and low delay, such as
+videoconferencing.">
     <meta name="author" content="Keith Winstein <keithw@mit.edu>">
 
     <!-- Le styles -->
@@ -60,20 +58,6 @@ transport protocols build up lengthy in-network queues.">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
-
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-30270105-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-    </script>
-
   </head>
 
   <body data-spy="scroll">
@@ -86,7 +70,7 @@ transport protocols build up lengthy in-network queues.">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Alfalfa</a>
+          <a class="brand" href="#">Sprout</a>
           <div class="nav-collapse">
             <ul class="nav">
               <li><a href="#about">About</a></li>
@@ -94,7 +78,6 @@ transport protocols build up lengthy in-network queues.">
               <li><a href="#code">Code</a></li>
               <li><a href="#methods">Methods</a></li>
               <li><a href="#results">Results</a></li>
-              <li><a href="#faq">FAQ</a></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
           </div><!--/.nav-collapse -->
@@ -106,45 +89,35 @@ transport protocols build up lengthy in-network queues.">
 
       <section id="about">
 	<div class="hero-unit">
-	  <p>
-	    <div class="row">
-	      <div class="span5">
-		<p><h1>Alfalfa</h1></p>
+	  <div class="row">
+	    <div class="span5">
+	      <p><h1>Sprout</h1></p>
 
-	      </div>
-	    </div>
-	    <div class="row">
-	      <div class="span5">
+	      <p>Sprout is a transport protocol for interactive
+		applications that desire high throughput and low
+		delay.</p>
 
-		<p>Alfalfa is an Internet videoconferencing protocol that
-		  works well over cellular wireless networks, where link speeds change
-		  dramatically with time, and current applications build up
-		  lengthy in-network queues.</p>
-		<p>In evaluations on traces from commercial LTE and 3G
-		  networks, Alfalfa's rate control scheme achieved 2&ndash;4
-		  times the throughput of Skype, Apple Facetime, and Google
-		  Hangout, while reducing self-inflicted delay by 7&ndash;9
-		  times.</p>
+	      <p>In evaluations on traces from commercial LTE and 3G
+		networks, Sprout achieved <strong>2&ndash;4
+		  times</strong> the throughput of Skype, Apple
+		Facetime, and Google Hangout, while reducing
+		self-inflicted delay by <strong>7&ndash;9 times</strong>.</p>
 		
-		<p>Alfalfa's research paper (to appear at NSDI 2013),
-		  C++ implementation, and supplementary information
-		  are available here. This is a draft Web site and we
-		  are working to improve it. We welcome contributions
-		  to the code and your feedback.</p>
-		
-		<p><small>&mdash; Keith Winstein, Anirudh Sivaraman,
-		    and Hari Balakrishnan</small></p>
+	      <p><small>&mdash; Keith Winstein, Anirudh Sivaraman,
+		  and Hari Balakrishnan</small></p>
 
-	      </div>
-	      <div class="span5">
-		<iframe width="560" height="315" src="http://www.youtube-nocookie.com/embed/ESqnuhz_dNY?rel=0" frameborder="0" allowfullscreen></iframe>
-	      </div>
+	      <p><a class="btn btn-primary btn-large" href="#paper">Research paper &raquo;</a>
+		<a class="btn btn-primary btn-large" href="#video">Tech video &raquo;</a>
+		<a class="btn btn-primary btn-large" href="#code">Source code &raquo;</a></p>
+
 	    </div>
-	  </p>
-	  
-          <p><a class="btn btn-primary btn-large" href="#paper">Get the research paper &raquo;</a>
-          <a class="btn btn-primary btn-large" href="#code">Get the code &raquo;</a></p>
+
+	    <div class="span5">
+	      <img src="sproutgraph2.png">
+	    </div>
+	  </div>
 	</div>
+	
       </section>
       
       <section id="paper">
@@ -152,11 +125,24 @@ transport protocols build up lengthy in-network queues.">
 	  <h1>Research paper</h1>
 	</div>
 
-	  <p><a href="alfalfa-paper.pdf"><img src="pdf.png">Stochastic Forecasts Achieve High Throughput and Low Delay over Cellular Networks</a> NSDI 2013 </p>
+	  <p><a href="https://www.usenix.org/system/files/conference/nsdi13/nsdi13-final113.pdf"><img src="pdf.png">Stochastic Forecasts Achieve High Throughput and Low Delay over Cellular Networks</a>, in the proceedings of the 10th USENIX Symposium on Networked Systems Design and Implementation (NSDI 2013), Lombard, Ill., April 2013.</p>
 
-	  <p>Supplementary material, including the raw traces of mobile cellular
-network paths, will be posted soon.</p>
+	  <p>Slides and a public summary are <a href="https://www.usenix.org/conference/nsdi13/stochastic-forecasts-achieve-high-throughput-and-low-delay-over-cellular-networks">available on the open-access conference proceedings site</a>.</p>
 
+      </section>
+
+      <section id="video">
+	<div class="page-header">
+	  <h1>Tech video</h1>
+	</div>
+
+	<p>The talk was given April 5, 2013.</p>
+	
+	<div class="row">
+	  <div class="span10">
+	    <iframe width="560" height="315" src="https://www.youtube.com/embed/FUgdF-2V8Cw" frameborder="0" allowfullscreen></iframe>
+	  </div>
+	</div>
       </section>
 
       <section id="code">
@@ -164,7 +150,7 @@ network paths, will be posted soon.</p>
 	  <h1>Code</h1>
 	</div>
 
-	  <p>The source code to Alfalfa/Sprout (evaluated in the research paper) is <a href="https://github.com/keithw/alfalfa">available on GitHub.</a></p>
+	  <p>The source code to Sprout (evaluated in the research paper) is <a href="https://github.com/keithw/alfalfa">available on GitHub.</a></p>
 
           <p>Source code to Sprout Tunnel (allows TCP to be tunneled within Sprout) <a href="https://github.com/anirudhSK/alfalfa"> available on GitHub </a> </p>
 
@@ -297,7 +283,7 @@ than 50 ms RTT from the carrier's first/last hop.</p>
 
 	<table>
 	  <tr><th>Program</th><th>Version</th><th>OS</th><th>Endpoints</th></tr>
-	  <tr><td>Alfalfa/Sprout</td><td>"evaluated" and "ewma-evaluated" tags</td><td>Linux 3.2.0-29-generic (Ubuntu 12.04 LTS)</td><td>Intel Core i7 PC</td></tr>
+	  <tr><td>Sprout</td><td>"evaluated" and "ewma-evaluated" tags</td><td>Linux 3.2.0-29-generic (Ubuntu 12.04 LTS)</td><td>Intel Core i7 PC</td></tr>
 	  <tr><td>Skype</td><td>5.10.0.116</td><td>Windows 7</td><td>Intel Core i7 PC</td></tr>
 	  <tr><td>Google Hangout</td><td>in Chrome 21.0.1180.89</td><td>Windows 7</td><td>Intel Core i7 PC</td></tr>
 	  <tr><td>Apple Facetime</td><td>2.0 (1070)</td><td>OS X 10.8.1</td><td>MacBook Pro (2.3 GHz i7), MacBook Air (1.8 GHz i5)</td></tr>
@@ -307,71 +293,6 @@ than 50 ms RTT from the carrier's first/last hop.</p>
 	  <tr><td>COMPOUND TCP</td><td>in Windows 7</td><td></td><td>Intel Core i7 PC</td></tr>
 	</table>
 
-      </section>
-
-      <section id="faq">
-	<div class="page-header">
-	  <h1>Frequently Asked Questions</h1>
-	</div>
-
-	<h4 class="callout">Q: Who wrote Alfalfa?</h4>
-
-	<p>Alfalfa was written by Keith Winstein, Anirudh Sivaraman, and Hari Balakrishnan.</p>
-
-	<h4 class="callout">Q: Can I use this for a real video conference?</h4>
-
-	<p>Unfortunately, not yet. We have an implementation of
-	"explicit-state" MPEG-2 video, as discussed in the research
-	paper, but we don't have audio and we haven't evaluated the
-	system end-to-end. Our evaluation focuses on the rate control
-	algorithm (Sprout), which achieves the maximum throughput
-	possible while bounding the probability of building up a
-	length in-network queue.</p>
-
-	<h4 class="callout">Q: Who helped with Alfalfa?</h4>
-
-	<p>We're grateful for assistance and helpful discussions with Andrew McGregor, Tim Shepard, Dave Täht, and Shuo Deng.</p>
-
-	<h4 class="callout">Q: What are the major limitations of these
-	measurements and this work?</h4>
-
-	<ul>
-
-	<li>We have only tested configurations where the flow (be it
-	Alfalfa, Skype, TCP, etc.) is the only flow on the bottleneck
-	link. This may be realistic for a cellular link with per-user
-	  queueing, but a home Internet link with many users sharing
-	  a cable modem may behave differently.</li>
-
-	<li>Our measurements covered a bidirectional video conference
-	  that transited one cellular link in each direction
-	  simultaneously. We haven't tested mobile-to-mobile links
-	  where each direction would transit two cellular links,
-	  or more complicated topologies.</li>
-
-	<li>We have only quantitatively evaluated
-	  the <strong>networking</strong> performance of Alfalfa,
-	  compared with the comparable algorithms in videoconferencing
-	  programs and various flavors of TCP. Although we think that
-	  the Alfalfa "explicit-state" video API is a good idea, we
-	  have only implemented it for MPEG-2, it is not competitive
-	  with more recent video coding techniques, and we have not
-	  tested an end-to-end video conferencing application.</li>
-
-	<li>Alfalfa's nature as an <strong>end-to-end</strong>
-	  application means that it cannot do things that modifying
-	  routers (e.g. by adding AQM) might achieve. For example, if
-	  a competing TCP flow has created a standing queue before our
-	  bottleneck link, it is probably impossible for any protocol
-	  to achieve low delay over that link. Changing the router to
-	  include per-flow queueing or AQM might be able to fix the
-	  problem in a way an end-to-end protocol can't.</li>
-
-	<li>Sprout's predictive model of link dynamics hasn't been
-	  tuned in response to much real-world data &mdash; it was
-	  "frozen" before we collected our traces and we have not
-	  tried to improve its predictive power on real varying links
-	  yet.</li>
       </section>
 
       <section id="contact">
